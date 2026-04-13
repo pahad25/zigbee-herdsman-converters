@@ -1031,7 +1031,6 @@ export const definitions: DefinitionWithExtend[] = [
             lumi.toZigbee.lumi_switch_operation_mode_opple,
             lumi.toZigbee.lumi_switch_power_outage_memory,
             lumi.toZigbee.lumi_flip_indicator_light,
-            lumi.toZigbee.lumi_led_disabled_night,
         ],
         meta: {multiEndpoint: true, multiEndpointSkip: ["power", "energy"]},
         endpoint: (device) => {
@@ -1048,7 +1047,6 @@ export const definitions: DefinitionWithExtend[] = [
             e.device_temperature().withAccess(ea.STATE),
             e.power_outage_memory(),
             e.flip_indicator_light(),
-            e.led_disabled_night(),
             e.power_outage_count(),
         ],
         configure: async (device, coordinatorEndpoint) => {
@@ -1060,7 +1058,7 @@ export const definitions: DefinitionWithExtend[] = [
                 {manufacturerCode: manufacturerCode, disableResponse: true},
             );
         },
-        extend: [lumi.modernExtend.addManuSpecificLumiCluster(), lumiZigbeeOTA(), lumiPreventReset()],
+        extend: [lumi.modernExtend.addManuSpecificLumiCluster(), lumiZigbeeOTA(), lumiPreventReset(), lumiLedDisabledNight()],
     },
     {
         zigbeeModel: ["lumi.ctrl_neutral1"],
